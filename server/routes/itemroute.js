@@ -9,15 +9,14 @@ router.get('/item/',(req,res,next)=>{
         .then((data) => res.json(data))
         .catch(next)
 })
+
 router.get('/sold/',async(req,res,next)=>{
  const nobids =  await Item.find({status: "no bids"})
  const sold =  await Item.find({status: "sold"})
  const together =  nobids.concat(sold)
  console.log(together);
  if (together){res.json({items:together})}
- else{ res.json({items: null})}
-
-       
+ else{ res.json({items: null})}     
 })
 
 router.post('/additems/', async(req,res,next)=>{
@@ -28,10 +27,19 @@ router.post('/additems/', async(req,res,next)=>{
     else{ res.json({items: null})}
         
 })
+router.post('/soldto/', async(req,res,next)=>{
+    const email= req.body.email
+    const status = req.body.status
+    console.log(email);
+    const useritems  = await Item.find({ objselleremail:email,status:status})
+    if (useritems){res.json({items:useritems})}
+    else{ res.json({items: null})}
+        
+})
 
 router.get('/categorie/:type', async(req,res,next)=>{
   
-    const itemType  = await Item.find({objtype:req.params.type}   )
+    const itemType  = await Item.find({objtype:req.params.type,status:"readyToSale"}   )
     if (itemType){res.json({items:itemType})}
     else{ res.json({items: null})}
         
