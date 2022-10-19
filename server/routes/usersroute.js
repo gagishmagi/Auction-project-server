@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-
+const jwt = require("jsonwebtoken");
 const User = require("../models/users");
-
 router.get("/users/", (req, res, next) => {
   User.find({})
     .then((data) => res.json(data))
@@ -45,7 +44,15 @@ router.post("/users/login", async (req, res, next) => {
   if (userrr) {
     const result = await bcrypt.compare(password, userrr.password);
     if (result) {
-      res.json({ valid: "logged", user: userrr });
+      const accessToken = jwt.sign(
+        {
+          id: userrr._id,
+        },
+        process.env.JWT_SEC,
+        { expiresIn: "3d" }
+      );
+
+      res.json({ valid: "logged", user: userrr, accessToken: accessToken });
     } else {
       res.json({ valid: "wrong", user: {} });
     }
