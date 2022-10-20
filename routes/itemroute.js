@@ -59,7 +59,7 @@ router.get('/item/:id',(req,res,next)=>{
     .catch(next)
 })
 //////,verifyToken
-router.post('/item',(req,res,next)=>{
+router.post('/item',verifyToken,(req,res,next)=>{
    
     req.body.objname?  
     Item.create(req.body)
