@@ -29,7 +29,7 @@ Open source. You are welcome!
 
  The server is running on Cyclic
 
- If you want to see the client code you are welcome to enter: [Server](https://github.com/Skandalev/Auction-project-client)
+ If you want to see the front end code you are welcome to enter: [front end](https://github.com/Skandalev/Auction-project-client)
  
 
 ## Demo version on netlify <a name="Demo"></a>
