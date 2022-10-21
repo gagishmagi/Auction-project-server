@@ -15,8 +15,9 @@ mongoose.connect(process.env.DB,{useNewUrlParser:true})
         .catch((err)=>console.log(err))
 
 app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Methods','*')
     res.header('Access-Control-Allow-Origin','*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept,Authorization,token');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept,Authorization');
     next();
     });
   
