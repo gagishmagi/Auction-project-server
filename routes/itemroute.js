@@ -22,7 +22,7 @@ router.get('/sold/',async(req,res,next)=>{
 
 router.post('/additems/', async(req,res,next)=>{
     const email= req.body.email
-    console.log(email);
+ 
     const useritems  = await Item.find({ objselleremail:email})
     if (useritems){res.json({items:useritems})}
     else{ res.json({items: null})}
@@ -39,7 +39,7 @@ router.post('/soldto/', async(req,res,next)=>{
 })
 router.post('/won/', async(req,res,next)=>{
     const email= req.body.email
-    console.log(email);
+  
     const useritems  = await Item.find({ clientemail:email})
     if (useritems){res.json({items:useritems})}
     else{ res.json({items: null})}
